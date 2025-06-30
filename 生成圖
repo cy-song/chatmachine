@@ -1,0 +1,44 @@
+import requests
+from PIL import  Image
+from io import  BytesIO
+from openai import OpenAI
+client=OpenAI(api_key='')
+file_name = "image2.png"
+
+def show_image(image_url):
+    response = requests.get(image_url)
+    image = Image.open(BytesIO(response.content))
+    image.show()
+    image.save(file_name, "PNG")
+    print(f"圖已存為{file_name}")
+response = client.images.generate(prompt="a very cute hamster cure mindset.",
+                                   n=1,
+                                   size="512x512"
+                                   )
+image_url = response.data[0].url
+
+print(image_url)
+show_image(image_url)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
